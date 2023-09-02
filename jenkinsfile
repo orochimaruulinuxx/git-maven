@@ -15,6 +15,9 @@ pipeline {
             }
         }
         stage('Sonarqube scan'){
+           tools {
+        sonarQube 'SonarQube Scanner 2.15'
+      }
           steps{
           withSonarQubeEnv('sonarqube')
         sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=orochimaruulinuxx_geolocation'
