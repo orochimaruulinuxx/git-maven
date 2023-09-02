@@ -5,7 +5,7 @@ pipeline {
     }
     environment {
         registry = '291896514643.dkr.ecr.us-east-1.amazonaws.com/jenkins-repo'
-        registryCredential = 'sysadmin-user'
+        registryCredential = 'jenkins-repo'
         dockerimage = ''
     }
     stages {
@@ -13,13 +13,6 @@ pipeline {
             steps{
                 git branch: 'main', url: 'https://github.com/orochimaruulinuxx/git-maven.git'
             }
-        }
-        stage('Sonarqube scan'){
-          steps{
-          withSOnarQubeEnv('sonarqube'){
-            sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=orochimaruulinuxx_geolocation'
-          }
-          }
         }
         stage('Code Build') {
             steps {
